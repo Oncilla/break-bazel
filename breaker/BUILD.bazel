@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["breaker.go"],
+    importpath = "github.com/Oncilla/break-bazel/breaker",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = [
+        "breaker_private_test.go",
+        "breaker_test.go",
+    ],
+    embed = [":go_default_library"],
+    deps = [
+        "//breaker/mock_breaker:go_default_library",
+        "@com_github_golang_mock//gomock:go_default_library",
+    ],
+)
