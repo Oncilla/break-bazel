@@ -10,6 +10,11 @@ test: gazelle
 gotest:
 	go test ./breaker/...
 
+fixtest:
+	cp breaker/breaker_private_test.fix breaker/breaker_private_test.go
+	bazel test //breaker/...
+	git checkout -- breaker
+
 clean:
 	rm -rf bazel-*
 
